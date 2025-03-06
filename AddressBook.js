@@ -146,6 +146,12 @@ static add(contact){
         console.log(`Contact with name ${firstName} ${lastName} not found.`);
     }
    }
+
+   //Method to get total contacts in address book
+   static getContacts(){
+    console.log(`Total Contacts in Address Book: ${AddressBook.addressBookArray.length}`);
+    return AddressBook.addressBookArray.length;
+   }
 }
 
 
@@ -189,3 +195,6 @@ console.log("\nDeleting Amit Sharma's contact...");
 AddressBook.delete("Amit", "Sharma");
 
 AddressBook.display();
+
+//get total contacts
+AddressBook.getContacts();
