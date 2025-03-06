@@ -22,8 +22,12 @@ class AddressBook {
             this.email = params[7];
         } catch (error) {
             console.error("Error creating contact:", error.message);
+            throw error;
         }
     }
+
+    //creating array
+    static addressBookArray = [];
 
     // Getters and Setters
 
@@ -87,19 +91,54 @@ class AddressBook {
         if (emailRegex.test(email)) this._email = email;
         else throw new Error("Invalid email format.");
     }
+
+    //creating method to add contacts in an array
+static add(contact){
+    try{
+    AddressBook.addressBookArray.push(contact);
+    console.log(`Contact Added Successfully: ${contact.firstName} ${contact.lastName}`);
+   }
+   catch(error){
+    console.error("Error adding contact", error.message);
+   }
+}
+   
+   //method to display all contacts
+   static display(){
+       console.log("Address Book Contacts");
+       AddressBook.addressBookArray.forEach(contact => console.log(   `Name: ${contact.firstName} ${contact.lastName}, ` +
+        `Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ` +
+        `Phone: ${contact.phoneNumber}, Email: ${contact.email}`
+));
+   }
 }
 
-// Checking valid contacts
-try {
-    let contact = new AddressBook("Ria", "Tandan", "Saket Nagar", "Bhopal", "Madhya Pradesh", "274289", "9876543210", "tandanria@gmail.com");
-    console.log("Contact added successfully:", contact);
-} catch (error) {
-    console.error(" Error adding contact:", error.message);
-}
 
-// Checking for invalid contact (Expected to throw an error)
-try {
-    let contact = new AddressBook("Jo", "doe", "12", "NY", "N", "123", "98765", "invalid-email");
-} catch (error) {
-    console.error(" Error adding contact:", error.message);
-}
+//Adding valid contacts in array
+try{
+    let contact1 = new AddressBook("Ria", "Tandan", "Saket Nagar", "Bhopal", "Madhya Pradesh", "274289", "9876543210", "tandanria@gmail.com");
+    AddressBook.add(contact1);
+} catch(error){}
+
+ try{
+        let contact2 = new AddressBook("Amit", "Sharma", "MG Road", "Indore", "Madhya Pradesh", "452001", "9998887776", "amit.sharma@gmail.com");
+        AddressBook.add(contact2);
+    }
+    catch(error){}
+    try{
+        let contact3 = new AddressBook("Raj", "Vardhan", "Ashoka garden", "Guna", "Madhya Pradesh", "457624", "9731188777", "raj.vardhan@gmail.com");
+        AddressBook.add(contact3);
+    } catch(error){}
+    try{
+        let contact4 = new AddressBook("Shubhi", "Sharma", "2-C", "Gwalior", "Madhya Pradesh", "459011", "4871019311", "shubhi11@gmail.com");
+        AddressBook.add(contact4);
+    } catch(error){}
+    try{
+        let contact5 = new AddressBook("Jharna", "Raina", "Old city", "Satna", "Madhya Pradesh", "137612", "6418374184", "jharna@gmail.com");
+        AddressBook.add(contact5);
+    }catch(error){}
+
+
+//display contacts
+AddressBook.display();
+
