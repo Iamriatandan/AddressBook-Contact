@@ -91,6 +91,11 @@ class AddressBook {
         if (emailRegex.test(email)) this._email = email;
         else throw new Error("Invalid email format.");
     }
+    //to string method
+    toString() {
+        return `Name: ${this._firstName} ${this._lastName}, Address: ${this._address}, City: ${this._city}, State: ${this._state}, Zip: ${this._zip}, Phone: ${this._phoneNumber}, Email: ${this._email}`;
+    }
+    
 
     //creating method to add contacts in an array
 static add(contact){
@@ -266,6 +271,34 @@ static add(contact){
             console.log("\nContacts Sorted Alphabetically by Name:");
             sortedContacts.map(contact => console.log(contact.toString()));
         }
+
+
+        // Sort by City
+    static sortByCity() {
+        const sortedContacts = [...AddressBook.addressBookArray].sort((a, b) =>
+            a.city.localeCompare(b.city)
+        );
+        console.log("\nContacts Sorted by City:");
+        sortedContacts.map(contact => console.log(contact.toString()));
+    }
+
+    // Sort by State
+    static sortByState() {
+        const sortedContacts = [...AddressBook.addressBookArray].sort((a, b) =>
+            a.state.localeCompare(b.state)
+        );
+        console.log("\nContacts Sorted by State:");
+        sortedContacts.map(contact => console.log(contact.toString()));
+    }
+
+    // Sort by Zip Code
+    static sortByZip() {
+        const sortedContacts = [...AddressBook.addressBookArray].sort((a, b) =>
+            a.zip.localeCompare(b.zip)
+        );
+        console.log("\nContacts Sorted by Zip Code:");
+        sortedContacts.map(contact => console.log(contact.toString()));
+    }
 }
 
 
@@ -340,3 +373,13 @@ AddressBook.countByState();
 AddressBook.sortByName();
 
 AddressBook.display();
+
+
+// Sorting by City
+AddressBook.sortByCity();
+
+// Sorting by State
+AddressBook.sortByState();
+
+// Sorting by Zip
+AddressBook.sortByZip();
