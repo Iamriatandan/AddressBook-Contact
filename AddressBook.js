@@ -1,5 +1,5 @@
 class AddressBook {
-    // Defining attributes (private variables)
+    // Defining attributes
     _firstName;
     _lastName;
     _address;
@@ -97,7 +97,7 @@ try {
     console.error(" Error adding contact:", error.message);
 }
 
-// Checking for invalid contact (Expected to throw an error)
+// Checking for invalid contact 
 try {
     let contact = new AddressBook("Jo", "doe", "12", "NY", "N", "123", "98765", "invalid-email");
 } catch (error) {
