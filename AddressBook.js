@@ -94,13 +94,17 @@ class AddressBook {
 
     //creating method to add contacts in an array
 static add(contact){
-    try{
-    AddressBook.addressBookArray.push(contact);
-    console.log(`Contact Added Successfully: ${contact.firstName} ${contact.lastName}`);
-   }
-   catch(error){
-    console.error("Error adding contact", error.message);
-   }
+    //checking for duplicates
+    const duplicate = AddressBook.addressBookArray.some(existingContact => existingContact.firstName=== contact.firstName&&
+        existingContact.lastName === contact.lastName
+    );
+    if(duplicate){
+        console.log(`Duplicate contact found: ${contact.firstName} ${contact.lastName}. Not adding.`);   
+    }
+    else{ AddressBook.addressBookArray.push(contact);
+        console.log(`Contact Added Successfully: ${contact.firstName} ${contact.lastName}`);
+       }
+   
 }
    
    //method to display all contacts
@@ -182,6 +186,14 @@ try{
 
 //display contacts
 AddressBook.display();
+
+
+//try to add duplicate contact
+try {
+    // Attempt to add a duplicate contact
+    let duplicateContact = new AddressBook("Amit", "Sharma", "New MG Road", "Indore", "Madhya Pradesh", "452002", "9998887776", "amit.duplicate@gmail.com");
+    AddressBook.add(duplicateContact);
+} catch (error) {}
 
 //Updating a contact
 console.log("Updating Amit Sharma's contact");
