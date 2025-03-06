@@ -107,10 +107,10 @@ static add(contact){
    
 }
    
-   //method to display all contacts
+   //method to display all contacts using map
    static display(){
        console.log("Address Book Contacts");
-       AddressBook.addressBookArray.forEach(contact => console.log(   `Name: ${contact.firstName} ${contact.lastName}, ` +
+       AddressBook.addressBookArray.map(contact => console.log(   `Name: ${contact.firstName} ${contact.lastName}, ` +
         `Address: ${contact.address}, ${contact.city}, ${contact.state}, ${contact.zip}, ` +
         `Phone: ${contact.phoneNumber}, Email: ${contact.email}`
 ));
@@ -151,11 +151,50 @@ static add(contact){
     }
    }
 
-   //Method to get total contacts in address book
+   //Method to get total contacts in address book using reduce
    static getContacts(){
-    console.log(`Total Contacts in Address Book: ${AddressBook.addressBookArray.length}`);
-    return AddressBook.addressBookArray.length;
+    const count = AddressBook.addressBookArray.reduce((total,contact)=> total+1,0);
+    console.log(`Total Contacts in Address Book: ${count}`);
+    return count;
    }
+
+   //Method to find particular city using filter
+   static findByCity(city){
+    const contactsInCity = AddressBook.addressBookArray.filter(contact=> contact.city.toLowerCase()===city.toLowerCase());
+    if(contactsInCity.length>0){
+        console.log(`\nContacts in ${city}:`);
+        contactsInCity.map(contact=> console.log(`${contact.firstName} ${contact.lastName}, Phone: ${contact.phoneNumber}, Email: ${contact.email}`));
+    }
+    else{
+        console.log(`\nNo contacts found in ${city}.`);
+    }
+   }
+   
+    // Method to find people in a particular state using filter()
+    static findByState(state) {
+        const contactsInState = AddressBook.addressBookArray.filter(contact => contact.state.toLowerCase() === state.toLowerCase());
+        if (contactsInState.length > 0) {
+            console.log(`\nContacts in ${state}:`);
+            contactsInState.map(contact => console.log(`${contact.firstName} ${contact.lastName}, Phone: ${contact.phoneNumber}, Email: ${contact.email}`));
+        } else {
+            console.log(`\nNo contacts found in ${state}.`);
+        }
+}
+
+
+    // Method to count people in a city using reduce()
+    static countByCity(city) {
+        const count = AddressBook.addressBookArray.reduce((total, contact) => contact.city.toLowerCase() === city.toLowerCase() ? total + 1 : total, 0);
+        console.log(`\nTotal contacts in ${city}: ${count}`);
+        return count;
+    }
+
+    // Method to count people in a state using reduce()
+    static countByState(state) {
+        const count = AddressBook.addressBookArray.reduce((total, contact) => contact.state.toLowerCase() === state.toLowerCase() ? total + 1 : total, 0);
+        console.log(`\nTotal contacts in ${state}: ${count}`);
+        return count;
+    }
 }
 
 
@@ -210,3 +249,10 @@ AddressBook.display();
 
 //get total contacts
 AddressBook.getContacts();
+
+// Search and count contacts in a particular city/state
+AddressBook.findByCity("Indore");
+AddressBook.findByState("Madhya Pradesh");
+
+AddressBook.countByCity("Indore");
+AddressBook.countByState("Madhya Pradesh");
