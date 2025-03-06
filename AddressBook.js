@@ -254,6 +254,18 @@ static add(contact){
             console.log(`${state}: ${count} contact(s)`);
         });
     }
+
+        // Method to sort contacts alphabetically by name
+        static sortByName() {
+            const sortedContacts = [...AddressBook.addressBookArray].sort((a, b) => {
+                let nameA = a.firstName.toLowerCase() + a.lastName.toLowerCase();
+                let nameB = b.firstName.toLowerCase() + b.lastName.toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+    
+            console.log("\nContacts Sorted Alphabetically by Name:");
+            sortedContacts.map(contact => console.log(contact.toString()));
+        }
 }
 
 
@@ -323,3 +335,8 @@ AddressBook.viewByState();
 // Count contacts by City and State
 AddressBook.countByCity();
 AddressBook.countByState();
+
+// Sort and display contacts
+AddressBook.sortByName();
+
+AddressBook.display();
