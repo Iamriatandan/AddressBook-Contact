@@ -228,6 +228,32 @@ static add(contact){
             console.log(`${state}: ${persons.join(", ")}`);
         });
     }
+
+    // // Method to count contacts by city
+    static countByCity() {
+        const cityCounts = AddressBook.addressBookArray.reduce((count, contact) => {
+            count[contact.city] = (count[contact.city] || 0) + 1;
+            return count;
+        }, {});
+
+        console.log("\nContact Count by City:");
+        Object.entries(cityCounts).map(([city, count]) => {
+            console.log(`${city}: ${count} contact(s)`);
+        });
+    }
+
+    // Method to count contacts by state
+    static countByState() {
+        const stateCounts = AddressBook.addressBookArray.reduce((count, contact) => {
+            count[contact.state] = (count[contact.state] || 0) + 1;
+            return count;
+        }, {});
+
+        console.log("\nContact Count by State:");
+        Object.entries(stateCounts).map(([state, count]) => {
+            console.log(`${state}: ${count} contact(s)`);
+        });
+    }
 }
 
 
@@ -293,3 +319,7 @@ AddressBook.countByState("Madhya Pradesh");
 // View contacts grouped by City and State
 AddressBook.viewByCity();
 AddressBook.viewByState();
+
+// Count contacts by City and State
+AddressBook.countByCity();
+AddressBook.countByState();
