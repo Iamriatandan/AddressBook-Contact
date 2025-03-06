@@ -195,6 +195,39 @@ static add(contact){
         console.log(`\nTotal contacts in ${state}: ${count}`);
         return count;
     }
+
+
+    // Method to display all persons by City
+    static viewByCity() {
+        const cityGroups = {};
+        AddressBook.addressBookArray.forEach(contact => {
+            if (!cityGroups[contact.city]) {
+                cityGroups[contact.city] = [];
+            }
+            cityGroups[contact.city].push(`${contact.firstName} ${contact.lastName}`);
+        });
+
+        console.log("\nPersons Grouped by City:");
+        Object.entries(cityGroups).map(([city, persons]) => {
+            console.log(`${city}: ${persons.join(", ")}`);
+        });
+    }
+
+    // Method to display all persons by State
+    static viewByState() {
+        const stateGroups = {};
+        AddressBook.addressBookArray.forEach(contact => {
+            if (!stateGroups[contact.state]) {
+                stateGroups[contact.state] = [];
+            }
+            stateGroups[contact.state].push(`${contact.firstName} ${contact.lastName}`);
+        });
+
+        console.log("\nPersons Grouped by State:");
+        Object.entries(stateGroups).map(([state, persons]) => {
+            console.log(`${state}: ${persons.join(", ")}`);
+        });
+    }
 }
 
 
@@ -256,3 +289,7 @@ AddressBook.findByState("Madhya Pradesh");
 
 AddressBook.countByCity("Indore");
 AddressBook.countByState("Madhya Pradesh");
+
+// View contacts grouped by City and State
+AddressBook.viewByCity();
+AddressBook.viewByState();
