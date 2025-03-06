@@ -134,6 +134,18 @@ static add(contact){
         console.log(`Contact with name ${firstName} ${lastName} not found.`);
     }
    }
+
+   //Method to find a person by name and delete contact
+   static delete(firstName,lastName){
+    const index = AddressBook.addressBookArray.findIndex(contact => contact.firstName === firstName && contact.lastName === lastName);
+
+    if(index !== -1){
+        AddressBook.addressBookArray.splice(index,1);
+        console.log(`Contact Deleted Successfully: ${firstName} ${lastName}`);
+    }else{
+        console.log(`Contact with name ${firstName} ${lastName} not found.`);
+    }
+   }
 }
 
 
@@ -170,4 +182,10 @@ console.log("Updating Amit Sharma's contact");
 AddressBook.updateContact("Amit","Sharma",{phoneNumber: "0987654567",address: "New Town Road"});
 
 //display Contacts
+AddressBook.display();
+
+// Deleting a contact
+console.log("\nDeleting Amit Sharma's contact...");
+AddressBook.delete("Amit", "Sharma");
+
 AddressBook.display();
