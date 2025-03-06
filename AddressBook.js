@@ -111,6 +111,29 @@ static add(contact){
         `Phone: ${contact.phoneNumber}, Email: ${contact.email}`
 ));
    }
+
+   //Method to find a contact by name and update it
+   static updateContact(firstName,lastName,updatedDetails){
+    let contact = AddressBook.addressBookArray.find(contact =>contact.firstName === firstName
+        && contact.lastName === lastName);
+
+    if(contact){
+        try{
+            Object.keys(updatedDetails).forEach(key =>{
+                if(contact.hasOwnProperty(`_${key}`)){
+                    contact[key] = updatedDetails[key];
+                }
+            });
+            console.log(`Contact Updated Successfully: ${contact.firstName} ${contact.lastName}`);
+        }
+        catch(error){
+            console.error("Error Updating contact",error.message);
+        }
+    }
+    else{
+        console.log(`Contact with name ${firstName} ${lastName} not found.`);
+    }
+   }
 }
 
 
@@ -142,3 +165,9 @@ try{
 //display contacts
 AddressBook.display();
 
+//Updating a contact
+console.log("Updating Amit Sharma's contact");
+AddressBook.updateContact("Amit","Sharma",{phoneNumber: "0987654567",address: "New Town Road"});
+
+//display Contacts
+AddressBook.display();
